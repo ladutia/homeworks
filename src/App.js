@@ -33,20 +33,20 @@ class App extends Component {
   };
 
   isFormCommitable = () => {
-    const { ...state } = this.state;
-    if (state.step === 1) {
+    const { step, firstName, lastName, email, cardNumber } = this.state;
+    if (step === 1) {
       if (
-        state.firstName !== "" &&
-        state.lastName !== "" &&
-        state.email !== "" &&
-        state.email.includes("@")
+        firstName !== "" &&
+        lastName !== "" &&
+        email !== "" &&
+        email.includes("@")
       ) {
         return true;
       } else {
         return false;
       }
-    } else if (state.step === 2) {
-      if (state.cardNumber.length === 16) {
+    } else if (step === 2) {
+      if (cardNumber.length === 16) {
         return true;
       } else {
         return false;
