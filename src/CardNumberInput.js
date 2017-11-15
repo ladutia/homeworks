@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
 class CardNumberInput extends Component {
-  state = {
-    number: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      number: this.format(props.cardNumber)
+    };
+  }
 
   format = number => {
     let newNumber = "";
