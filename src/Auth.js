@@ -1,30 +1,25 @@
 import React, { Component } from "react";
-import { authorizeUser, isAuthorized } from "./AuthorizeApi";
+import { isAuthorized, authorizeUser } from "./AuthorizeApi";
 import { Redirect } from "react-router-dom";
 
 class Auth extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      attempts: 0,
-      isAuthorized
-    };
-  }
+  state = {
+    email: "",
+    password: "",
+    isErrorAuth: false,
+    isAuthorized: isAuthorized
+  };
 
   handleSubmit = event => {
-    const { email, password, attempts } = this.state;
+    const { email, password } = this.state;
     let isAuth = authorizeUser(email, password);
 
     this.setState({ isAuthorized: isAuth });
-    if (!isAuth) this.setState({ attempts: attempts + 1 });
+    if (!isAuth) this.setState({ isErrorAuth: true });
   };
 
   handleChangeInput = event => {
-    const name = event.target.getAttribute("name");
-    const value = event.target.value;
-
+    const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
@@ -33,21 +28,25 @@ class Auth extends Component {
 
     return (
       <div>
-        {state.isAuthorized ? <Redirect to="/" /> : null}
+        {state.isAuthorized && <Redirect to="/" />}
         <div>
           <input
+            type="text"
             name="email"
+            value={state.email}
             placeholder="Email"
             onChange={this.handleChangeInput}
           />
           <input
+            type="text"
+            value={state.password}
             name="password"
             placeholder="Password"
             onChange={this.handleChangeInput}
           />
-          {state.attempts > 0 ? (
+          {state.isErrorAuth && (
             <p className="error">Неверный пароль и/или почта.</p>
-          ) : null}
+          )}
         </div>
         <button onClick={this.handleSubmit}>Submit</button>
       </div>

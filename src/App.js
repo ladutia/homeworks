@@ -54,7 +54,7 @@ class App extends Component {
             )}
             <Route path="/public" component={Public} />
             <Route path="/auth" component={Auth} />
-            {!state.isAuthorized ? <Redirect to="/" /> : null}
+            {!state.isAuthorized ? <Redirect from="*" to="/" /> : null}
           </Switch>
         </div>
       </div>
