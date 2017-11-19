@@ -1,4 +1,4 @@
-let mockFn = (email, password) => email === 'e' && password === 'p';
+let mockFn = (email, password) => email === "e" && password === "p";
 
 export const setMockFn = fn => {
   mockFn = fn;
