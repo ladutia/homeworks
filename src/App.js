@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import {addListener, removeListener, isAuthorized} from './AuthorizeApi';
 
 class App extends Component {
+  state = {
+    isAuthorized
+  };
+
+  componentDidMount() {
+    addListener(this.handleAuthorize);
+  }
+
+  componentWillUnmount() {
+    removeListener(this.handleAuthorize);
+  }
+
+  handleAuthorize = isAuthorized => {
+    this.setState({isAuthorized});
+  };
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    return null;
   }
 }
 
