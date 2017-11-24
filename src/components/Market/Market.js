@@ -1,25 +1,25 @@
-import React, {Component} from 'react';
-import './Market.css';
+import React, { Component } from "react";
+import "./Market.css";
 
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 let id = 0;
 const getId = () => {
   id += 1;
   return id;
 };
 export const vegetables = [
-  'Капуста',
-  'Редиска',
-  'Огурцы',
-  'Морковь',
-  'Горох',
-  'Баклажан',
-  'Тыква',
-  'Чеснок',
-  'Лук',
-  'Перец',
-  'Картофель',
-  'Редька'
+  "Капуста",
+  "Редиска",
+  "Огурцы",
+  "Морковь",
+  "Горох",
+  "Баклажан",
+  "Тыква",
+  "Чеснок",
+  "Лук",
+  "Перец",
+  "Картофель",
+  "Редька"
 ];
 
 const getNewOrder = () => {
@@ -33,7 +33,14 @@ const getNewOrder = () => {
 
 export class Market extends Component {
   render() {
-    return <div />;
+    return (
+      <div className="market">
+        <h2>Новые заказы в магазине</h2>
+        <button className="new-orders__create-button">Создать заказ</button>
+        <button disabled>Отправить заказ на ферму</button>
+        <div className="order-list" />
+      </div>
+    );
   }
 }
 
