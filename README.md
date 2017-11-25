@@ -5,3 +5,4 @@ HOMEWORKS Aleksey Ladutska
 + ДЗ-3: git checkout homework-3
 + ДЗ-4: git checkout homework-4
 + ДЗ-5: git checkout homework-5
++ ДЗ-6: git checkout homework-6
