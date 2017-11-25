@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Market.css";
 import { connect } from "react-redux";
-import { createOrder } from "../../actions/marketActions";
+import { createOrder, moveOrderToFarm } from "../../actions/marketActions";
 import Order from "../Order";
 
 let id = 0;
@@ -35,8 +35,13 @@ const getNewOrder = () => {
 
 export class Market extends Component {
   handleCreateOrder = () => this.props.createOrder(getNewOrder());
+  handleMoveOrderToFarm = () => {
+    this.props.moveOrderToFarm(Object.assign([], this.props.orders)[0]);
+  };
 
   render() {
+    const orders = Object.assign([], this.props.orders).reverse();
+
     return (
       <div className="market">
         <h2>Новые заказы в магазине</h2>
@@ -46,9 +51,14 @@ export class Market extends Component {
         >
           Создать заказ
         </button>
-        <button disabled>Отправить заказ на ферму</button>
+        <button
+          disabled={orders.length ? false : true}
+          onClick={this.handleMoveOrderToFarm}
+        >
+          Отправить заказ на ферму {}
+        </button>
         <div className="order-list">
-          {this.props.orders.map(order => {
+          {orders.map(order => {
             return (
               <Order
                 key={order.id}
@@ -70,7 +80,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  createOrder
+  createOrder,
+  moveOrderToFarm
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Market);

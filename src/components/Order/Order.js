@@ -4,7 +4,6 @@ import "./Order.css";
 export default class Order extends Component {
   render() {
     const props = this.props;
-
     return (
       <div className="order">
         <div className="order__upper">

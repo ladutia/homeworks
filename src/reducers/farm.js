@@ -1,17 +1,18 @@
-import { CREATE_ORDER, MOVE_ORDER_TO_FARM } from "../actions/marketTypes";
+import { MOVE_ORDER_TO_FARM } from "../actions/marketTypes";
+import { MOVE_ORDER_TO_CUSTOMER } from "../actions/farmTypes";
 
 const initialState = {
   orders: []
 };
 
-const market = (state = initialState, action) => {
+const farm = (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_ORDER:
+    case MOVE_ORDER_TO_FARM:
       return {
         ...state,
         orders: [...state.orders, action.payload]
       };
-    case MOVE_ORDER_TO_FARM:
+    case MOVE_ORDER_TO_CUSTOMER:
       return Object.assign({}, state, {
         orders: state.orders.filter(order => action.payload.id !== order.id)
       });
@@ -20,4 +21,4 @@ const market = (state = initialState, action) => {
   }
 };
 
-export default market;
+export default farm;
